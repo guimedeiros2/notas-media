@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notas</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+<h2>Notas</h2>
+<form id="formulario">
+    <label for="nome"> Aluno:</label>
+    <input type="text" id="nome" required>
+    <br><br>
+    <label for="nota1">1º Tri:</label>
+    <input type="number" id="nota1" min="0" max="10" step="0.1" required>
+    <br><br>
+    <label for="nota2">2º Tri:</label>
+    <input type="number" id="nota2" min="0" max="10" step="0.1" required>
+    <br><br>
+    <label for="nota3">3º Tri:</label>
+    <input type="number" id="nota3" min="0" max="10" step="0.1" required>
+    <br><br>
+    <button type="button" onclick="inserirDados()">Inserir</button>
+</form>
+<br>
+<table id="tabela">
+    <tr>
+        <th>Nome</th>
+        <th>1º Tri</th>
+        <th>2º Tri</th>
+        <th>3º Tri</th>
+        <th>Média</th>
+        <th>Sit</th>
+    </tr>
+</table>
+
+<script>
+function inserirDados() {
+    var nome = document.getElementById("nome").value;
+    var nota1 = parseFloat(document.getElementById("nota1").value);
+    var nota2 = parseFloat(document.getElementById("nota2").value);
+    var nota3 = parseFloat(document.getElementById("nota3").value);
+    var media = (nota1 + nota2 + nota3) / 3;
+    var situacao = media >= 7 ? "Aprovado" : "Reprovado";
+
+    var tabela = document.getElementById("tabela").getElementsByTagName('tbody')[0];
+    var novaLinha = tabela.insertRow(tabela.rows.length);
+
+    var colunaNome = novaLinha.insertCell(0);
+    var colunaNota1 = novaLinha.insertCell(1);
+    var colunaNota2 = novaLinha.insertCell(2);
+    var colunaNota3 = novaLinha.insertCell(3);
+    var colunaMedia = novaLinha.insertCell(4);
+    var colunaSituacao = novaLinha.insertCell(5);
+
+    colunaNome.innerHTML = nome;
+    colunaNota1.innerHTML = nota1;
+    colunaNota2.innerHTML = nota2;
+    colunaNota3.innerHTML = nota3;
+    colunaMedia.innerHTML = media.toFixed(2);
+    colunaSituacao.innerHTML = situacao;
+}
+</script>
+</body>
+</html>
